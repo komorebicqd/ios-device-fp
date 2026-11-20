@@ -71,9 +71,27 @@ jobs:
 
       - name: 在 iOS 模拟器运行测试
         run: |
+          set -euo pipefail
+
+          rm -rf TestResults.xcresult
+
           xcodebuild test \
-            -scheme "${PACKAGE_NAME}-Package" \
+            -scheme "${PACKAGE_NAME}" \
             -destination "platform=iOS Simulator,name=iPhone 16" \
             -derivedDataPath .build/DerivedData \
             -parallel-testing-enabled NO \
+            -resultBundlePath TestResults.xcresult \
             -quiet
+
+          # 输出测试摘要，并确保真的有用例被执行（防止 scheme 未配置 Test 时"空跑成功"）。
+          xcrun xcresulttool get test-results summary --path TestResults.xcresult
+
+          PASSED=$(xcrun xcresulttool get test-results summary --path TestResults.xcresult \
+            | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('passedTests') or d.get('totalTestCount') or 0)")
+
+          if [ "${PASSED}" -lt 1 ]; then
+            echo "::error::iOS 模拟器上没有执行任何测试用例，请检查 scheme 的 Test 配置"
+            exit 1
+          fi
+
+          echo "iOS 模拟器测试通过，执行用例数：${PASSED}"
