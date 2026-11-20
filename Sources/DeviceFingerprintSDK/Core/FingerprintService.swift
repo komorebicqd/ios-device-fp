@@ -151,7 +151,7 @@ final class FingerprintService {
                 completion(.failure(error))
             case .success(let response):
                 guard response.success, !response.deviceId.isEmpty else {
-                    completion(.failure(.serverRejected("服务端未返回有效 deviceId")))
+                    completion(.failure(FingerprintError.serverRejected("服务端未返回有效 deviceId")))
                     return
                 }
                 do {

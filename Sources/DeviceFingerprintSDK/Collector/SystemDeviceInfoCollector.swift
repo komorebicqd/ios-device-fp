@@ -13,7 +13,7 @@ public struct SystemDeviceInfoCollector: DeviceInfoCollecting {
     public init() {}
 
     public func collect(clientAnchorId: String) -> RawDeviceInfo {
-        let screen = Self.screenMetrics()
+        let screen = Self.screenMetrics
         return RawDeviceInfo(
             clientAnchorId: clientAnchorId,
             idfv: Self.identifierForVendor,
