@@ -1,0 +1,79 @@
+name: iOS SDK CI
+
+# 触发条件：
+# - push 到 main / master
+# - 任意 PR（含 fork）指向 main / master
+# - 手动在 Actions 页面触发
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+# 同一分支的新提交会取消上一次仍在运行的构建，节省 Runner 配额。
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  PACKAGE_NAME: DeviceFingerprintSDK
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Job 1：在 macOS 上执行 `swift test`
+  # 直接验证 Swift Package 的编译 + 单元测试，是最快、最稳定的门禁。
+  # ---------------------------------------------------------------------------
+  swift-test:
+    name: swift test (macOS)
+    runs-on: macos-15
+    timeout-minutes: 20
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 打印工具链版本
+        run: |
+          xcodebuild -version
+          swift --version
+          xcrun --show-sdk-version
+
+      - name: 编译（含测试目标）
+        run: swift build --build-tests
+
+      - name: 运行单元测试
+        run: swift test
+
+  # ---------------------------------------------------------------------------
+  # Job 2：在 iOS 模拟器上执行 `xcodebuild test`
+  # 验证 UIKit / 真机路径下的编译与测试，避免只在 macOS 上通过。
+  # 说明：SwiftPM 包在 Xcode 中会自动生成名为 `<PackageName>-Package` 的 scheme。
+  # ---------------------------------------------------------------------------
+  ios-simulator-test:
+    name: xcodebuild test (iOS Simulator)
+    runs-on: macos-15
+    timeout-minutes: 30
+    needs: swift-test
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 打印可用 scheme 与模拟器（仅日志）
+        run: |
+          xcodebuild -version
+          xcodebuild -list 2>&1 || true
+          xcrun simctl list devices available | sed -n '1,40p'
+
+      - name: 在 iOS 模拟器运行测试
+        run: |
+          xcodebuild test \
+            -scheme "${PACKAGE_NAME}-Package" \
+            -destination "platform=iOS Simulator,name=iPhone 16" \
+            -derivedDataPath .build/DerivedData \
+            -parallel-testing-enabled NO \
+            -quiet
