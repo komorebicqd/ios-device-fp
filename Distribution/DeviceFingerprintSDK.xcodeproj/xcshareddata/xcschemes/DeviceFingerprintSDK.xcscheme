@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B10000000000000000000201"
+               BlueprintIdentifier = "B10000000000000000000301"
                BuildableName = "DeviceFingerprintSDK.framework"
                BlueprintName = "DeviceFingerprintSDK"
                ReferencedContainer = "container:DeviceFingerprintSDK.xcodeproj">
