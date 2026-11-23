@@ -1,6 +1,6 @@
 name: Release XCFramework
 
-# 推送 v* 标签时构建并发布二进制产物；也可在 Actions 页面手动触发（只产出 artifact，不发 Release）。
+# 推送 v* 标签时构建二进制并发布到商户分发仓库；手动触发只构建并上传 Artifact。
 on:
   push:
     tags: ["v*"]
@@ -8,6 +8,10 @@ on:
 
 permissions:
   contents: write
+
+env:
+  # 商户可见的分发仓库（只放 Package.swift 与 xcframework.zip）
+  DIST_REPO: komorebicqd/ios-device-fp-dist
 
 jobs:
   build-xcframework:
@@ -47,7 +51,7 @@ jobs:
           echo "version=${VERSION}" >> "${GITHUB_OUTPUT}"
           echo "checksum=${CHECKSUM} version=${VERSION}"
 
-      - name: 生成二进制分发的 Package.swift
+      - name: 生成商户版 Package.swift
         env:
           VERSION: ${{ steps.build.outputs.version }}
           CHECKSUM: ${{ steps.build.outputs.checksum }}
@@ -68,7 +72,7 @@ jobs:
               targets: [
                   .binaryTarget(
                       name: "DeviceFingerprintSDK",
-                      url: "https://github.com/${GITHUB_REPOSITORY}/releases/download/v${VERSION}/DeviceFingerprintSDK.xcframework.zip",
+                      url: "https://github.com/${DIST_REPO}/releases/download/v${VERSION}/DeviceFingerprintSDK.xcframework.zip",
                       checksum: "${CHECKSUM}"
                   )
               ]
@@ -86,21 +90,40 @@ jobs:
             dist/Package.swift
           if-no-files-found: error
 
-      - name: 创建 / 更新 GitHub Release
+      - name: 发布到商户分发仓库
         if: startsWith(github.ref, 'refs/tags/v')
         env:
-          GH_TOKEN: ${{ github.token }}
+          DIST_TOKEN: ${{ secrets.DIST_REPO_TOKEN }}
           VERSION: ${{ steps.build.outputs.version }}
         run: |
           set -euo pipefail
-          TAG="v${VERSION}"
-          ASSETS=(
-            ".build/distribution/DeviceFingerprintSDK.xcframework.zip"
-            "dist/Package.swift"
-          )
 
-          if gh release view "${TAG}" >/dev/null 2>&1; then
-            gh release upload "${TAG}" "${ASSETS[@]}" --clobber
+          if [ -z "${DIST_TOKEN}" ]; then
+            echo "::warning::未配置 DIST_REPO_TOKEN，已跳过发布（产物见 Artifact）"
+            exit 0
+          fi
+
+          export GH_TOKEN="${DIST_TOKEN}"
+          TAG="v${VERSION}"
+          CONTENT="$(base64 < dist/Package.swift | tr -d '\n')"
+
+          SHA="$(gh api "repos/${DIST_REPO}/contents/Package.swift" --jq .sha 2>/dev/null || true)"
+          if [ -n "${SHA}" ]; then
+            gh api -X PUT "repos/${DIST_REPO}/contents/Package.swift" \
+              -f message="chore: bump Package.swift to ${TAG}" \
+              -f content="${CONTENT}" \
+              -f sha="${SHA}" > /dev/null
           else
-            gh release create "${TAG}" "${ASSETS[@]}" --title "${TAG}" --generate-notes
+            gh api -X PUT "repos/${DIST_REPO}/contents/Package.swift" \
+              -f message="chore: add Package.swift for ${TAG}" \
+              -f content="${CONTENT}" > /dev/null
+          fi
+
+          if gh release view "${TAG}" --repo "${DIST_REPO}" >/dev/null 2>&1; then
+            gh release upload "${TAG}" --repo "${DIST_REPO}" \
+              ".build/distribution/DeviceFingerprintSDK.xcframework.zip" --clobber
+          else
+            gh release create "${TAG}" --repo "${DIST_REPO}" \
+              ".build/distribution/DeviceFingerprintSDK.xcframework.zip" \
+              --title "${TAG}" --generate-notes
           fi
