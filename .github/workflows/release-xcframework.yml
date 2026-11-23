@@ -1,0 +1,106 @@
+name: Release XCFramework
+
+# 推送 v* 标签时构建并发布二进制产物；也可在 Actions 页面手动触发（只产出 artifact，不发 Release）。
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-xcframework:
+    name: 构建 XCFramework
+    runs-on: macos-15
+    timeout-minutes: 30
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 打印工具链版本
+        run: |
+          xcodebuild -version
+          swift --version
+
+      - name: 构建 XCFramework
+        id: build
+        run: |
+          set -euo pipefail
+
+          bash Scripts/build-xcframework.sh | tee build.log
+
+          CHECKSUM="$(grep '^SHA256=' build.log | cut -d= -f2 | tr -d '[:space:]')"
+          if [ -z "${CHECKSUM}" ]; then
+            echo "::error::未能从构建输出中解析 SHA256"
+            exit 1
+          fi
+
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+          else
+            VERSION="0.0.0-dev"
+          fi
+
+          echo "checksum=${CHECKSUM}" >> "${GITHUB_OUTPUT}"
+          echo "version=${VERSION}" >> "${GITHUB_OUTPUT}"
+          echo "checksum=${CHECKSUM} version=${VERSION}"
+
+      - name: 生成二进制分发的 Package.swift
+        env:
+          VERSION: ${{ steps.build.outputs.version }}
+          CHECKSUM: ${{ steps.build.outputs.checksum }}
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+
+          cat > dist/Package.swift <<EOF
+          // swift-tools-version:5.7
+          import PackageDescription
+
+          let package = Package(
+              name: "DeviceFingerprintSDK",
+              platforms: [.iOS(.v13)],
+              products: [
+                  .library(name: "DeviceFingerprintSDK", targets: ["DeviceFingerprintSDK"])
+              ],
+              targets: [
+                  .binaryTarget(
+                      name: "DeviceFingerprintSDK",
+                      url: "https://github.com/${GITHUB_REPOSITORY}/releases/download/v${VERSION}/DeviceFingerprintSDK.xcframework.zip",
+                      checksum: "${CHECKSUM}"
+                  )
+              ]
+          )
+          EOF
+
+          cat dist/Package.swift
+
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: DeviceFingerprintSDK-xcframework
+          path: |
+            .build/distribution/DeviceFingerprintSDK.xcframework.zip
+            dist/Package.swift
+          if-no-files-found: error
+
+      - name: 创建 / 更新 GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.build.outputs.version }}
+        run: |
+          set -euo pipefail
+          TAG="v${VERSION}"
+          ASSETS=(
+            ".build/distribution/DeviceFingerprintSDK.xcframework.zip"
+            "dist/Package.swift"
+          )
+
+          if gh release view "${TAG}" >/dev/null 2>&1; then
+            gh release upload "${TAG}" "${ASSETS[@]}" --clobber
+          else
+            gh release create "${TAG}" "${ASSETS[@]}" --title "${TAG}" --generate-notes
+          fi

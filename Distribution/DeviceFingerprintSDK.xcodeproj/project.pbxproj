@@ -1,0 +1,396 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B10000000000000000000101 /* FingerprintSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000001 /* FingerprintSDK.swift */; };
+		B10000000000000000000102 /* FingerprintService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000202 /* FingerprintService.swift */; };
+		B10000000000000000000103 /* FingerprintDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000203 /* FingerprintDependencies.swift */; };
+		B10000000000000000000104 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000204 /* Models.swift */; };
+		B10000000000000000000105 /* SignatureComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000205 /* SignatureComposer.swift */; };
+		B10000000000000000000106 /* KeychainStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000302 /* KeychainStoring.swift */; };
+		B10000000000000000000107 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000303 /* KeychainStore.swift */; };
+		B10000000000000000000108 /* FingerprintCryptoProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000402 /* FingerprintCryptoProviding.swift */; };
+		B10000000000000000000109 /* DefaultCryptoEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000403 /* DefaultCryptoEngine.swift */; };
+		B10000000000000000000110 /* PEMRSAKeyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000404 /* PEMRSAKeyParser.swift */; };
+		B10000000000000000000111 /* DeviceInfoCollecting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000502 /* DeviceInfoCollecting.swift */; };
+		B10000000000000000000112 /* SystemDeviceInfoCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000503 /* SystemDeviceInfoCollector.swift */; };
+		B10000000000000000000113 /* RawDeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000504 /* RawDeviceInfo.swift */; };
+		B10000000000000000000114 /* OrderedJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000505 /* OrderedJSON.swift */; };
+		B10000000000000000000115 /* HTTPClienting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000602 /* HTTPClienting.swift */; };
+		B10000000000000000000116 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000603 /* URLSessionHTTPClient.swift */; };
+		B10000000000000000000117 /* FingerprintError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000702 /* FingerprintError.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B10000000000000000000001 /* FingerprintSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerprintSDK.swift; sourceTree = "<group>"; };
+		B10000000000000000000202 /* FingerprintService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerprintService.swift; sourceTree = "<group>"; };
+		B10000000000000000000203 /* FingerprintDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerprintDependencies.swift; sourceTree = "<group>"; };
+		B10000000000000000000204 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		B10000000000000000000205 /* SignatureComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureComposer.swift; sourceTree = "<group>"; };
+		B10000000000000000000302 /* KeychainStoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStoring.swift; sourceTree = "<group>"; };
+		B10000000000000000000303 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
+		B10000000000000000000402 /* FingerprintCryptoProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerprintCryptoProviding.swift; sourceTree = "<group>"; };
+		B10000000000000000000403 /* DefaultCryptoEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCryptoEngine.swift; sourceTree = "<group>"; };
+		B10000000000000000000404 /* PEMRSAKeyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PEMRSAKeyParser.swift; sourceTree = "<group>"; };
+		B10000000000000000000502 /* DeviceInfoCollecting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoCollecting.swift; sourceTree = "<group>"; };
+		B10000000000000000000503 /* SystemDeviceInfoCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemDeviceInfoCollector.swift; sourceTree = "<group>"; };
+		B10000000000000000000504 /* RawDeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawDeviceInfo.swift; sourceTree = "<group>"; };
+		B10000000000000000000505 /* OrderedJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedJSON.swift; sourceTree = "<group>"; };
+		B10000000000000000000602 /* HTTPClienting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClienting.swift; sourceTree = "<group>"; };
+		B10000000000000000000603 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
+		B10000000000000000000702 /* FingerprintError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerprintError.swift; sourceTree = "<group>"; };
+		B10000000000000000000401 /* DeviceFingerprintSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DeviceFingerprintSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B10000000000000000000302 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B10000000000000000000801 = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000802 /* Sources */,
+				B10000000000000000000803 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B10000000000000000000802 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000001 /* FingerprintSDK.swift */,
+				B10000000000000000000201 /* Core */,
+				B10000000000000000000301 /* Storage */,
+				B10000000000000000000401 /* Crypto */,
+				B10000000000000000000501 /* Collector */,
+				B10000000000000000000601 /* Network */,
+				B10000000000000000000701 /* Errors */,
+			);
+			name = Sources;
+			path = ../Sources/DeviceFingerprintSDK;
+			sourceTree = "<group>";
+		};
+		B10000000000000000000201 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000202 /* FingerprintService.swift */,
+				B10000000000000000000203 /* FingerprintDependencies.swift */,
+				B10000000000000000000204 /* Models.swift */,
+				B10000000000000000000205 /* SignatureComposer.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		B10000000000000000000301 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000302 /* KeychainStoring.swift */,
+				B10000000000000000000303 /* KeychainStore.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		B10000000000000000000401 /* Crypto */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000402 /* FingerprintCryptoProviding.swift */,
+				B10000000000000000000403 /* DefaultCryptoEngine.swift */,
+				B10000000000000000000404 /* PEMRSAKeyParser.swift */,
+			);
+			path = Crypto;
+			sourceTree = "<group>";
+		};
+		B10000000000000000000501 /* Collector */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000502 /* DeviceInfoCollecting.swift */,
+				B10000000000000000000503 /* SystemDeviceInfoCollector.swift */,
+				B10000000000000000000504 /* RawDeviceInfo.swift */,
+				B10000000000000000000505 /* OrderedJSON.swift */,
+			);
+			path = Collector;
+			sourceTree = "<group>";
+		};
+		B10000000000000000000601 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000602 /* HTTPClienting.swift */,
+				B10000000000000000000603 /* URLSessionHTTPClient.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		B10000000000000000000701 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000702 /* FingerprintError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		B10000000000000000000803 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B10000000000000000000401 /* DeviceFingerprintSDK.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B10000000000000000000304 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		B10000000000000000000201 /* DeviceFingerprintSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B10000000000000000000311 /* Build configuration list for PBXNativeTarget "DeviceFingerprintSDK" */;
+			buildPhases = (
+				B10000000000000000000304 /* Headers */,
+				B10000000000000000000301 /* Sources */,
+				B10000000000000000000302 /* Frameworks */,
+				B10000000000000000000303 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DeviceFingerprintSDK;
+			productName = DeviceFingerprintSDK;
+			productReference = B10000000000000000000401 /* DeviceFingerprintSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B10000000000000000000202 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					B10000000000000000000201 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = B10000000000000000000310 /* Build configuration list for PBXProject "DeviceFingerprintSDK" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B10000000000000000000801;
+			productRefGroup = B10000000000000000000803 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B10000000000000000000201 /* DeviceFingerprintSDK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B10000000000000000000303 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B10000000000000000000301 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000000000000000000101 /* FingerprintSDK.swift in Sources */,
+				B10000000000000000000102 /* FingerprintService.swift in Sources */,
+				B10000000000000000000103 /* FingerprintDependencies.swift in Sources */,
+				B10000000000000000000104 /* Models.swift in Sources */,
+				B10000000000000000000105 /* SignatureComposer.swift in Sources */,
+				B10000000000000000000106 /* KeychainStoring.swift in Sources */,
+				B10000000000000000000107 /* KeychainStore.swift in Sources */,
+				B10000000000000000000108 /* FingerprintCryptoProviding.swift in Sources */,
+				B10000000000000000000109 /* DefaultCryptoEngine.swift in Sources */,
+				B10000000000000000000110 /* PEMRSAKeyParser.swift in Sources */,
+				B10000000000000000000111 /* DeviceInfoCollecting.swift in Sources */,
+				B10000000000000000000112 /* SystemDeviceInfoCollector.swift in Sources */,
+				B10000000000000000000113 /* RawDeviceInfo.swift in Sources */,
+				B10000000000000000000114 /* OrderedJSON.swift in Sources */,
+				B10000000000000000000115 /* HTTPClienting.swift in Sources */,
+				B10000000000000000000116 /* URLSessionHTTPClient.swift in Sources */,
+				B10000000000000000000117 /* FingerprintError.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B10000000000000000000321 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B10000000000000000000322 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B10000000000000000000323 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.DeviceFingerprintSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B10000000000000000000324 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.DeviceFingerprintSDK;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B10000000000000000000310 /* Build configuration list for PBXProject "DeviceFingerprintSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B10000000000000000000321 /* Debug */,
+				B10000000000000000000322 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B10000000000000000000311 /* Build configuration list for PBXNativeTarget "DeviceFingerprintSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B10000000000000000000323 /* Debug */,
+				B10000000000000000000324 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B10000000000000000000202 /* Project object */;
+}

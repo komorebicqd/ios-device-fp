@@ -95,3 +95,13 @@ jobs:
           fi
 
           echo "iOS 模拟器测试通过，执行用例数：${PASSED}"
+
+      - name: 构建 Demo App（验证 Xcode 工程 + 本地包集成）
+        run: |
+          xcodebuild build \
+            -project Demo/FingerprintDemo.xcodeproj \
+            -scheme FingerprintDemo \
+            -destination "platform=iOS Simulator,name=iPhone 16" \
+            -derivedDataPath .build/DemoDerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            -quiet
